@@ -40,6 +40,12 @@ COPY ./src/ubuntu/install/gtk/ $INST_SCRIPTS/gtk/
 RUN bash $INST_SCRIPTS/gtk/install_restricted_file_chooser.sh
 
 RUN sed -i -e 's/KasmVNC/WebProtectVNC/g' -e 's/kasmweb.com/bittrack.de/g' /usr/share/kasmvnc/www/index.html
+RUN tee -a /etc/kasmvnc/kasmvnc.yaml <<EOF
+data_loss_prevention:
+  clipboard:
+    server_to_client:
+      primary_clipboard_enabled: true
+EOF
 
 ######### End Customizations ###########
 
